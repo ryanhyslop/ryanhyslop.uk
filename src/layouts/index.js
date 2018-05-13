@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import Typekit from 'react-typekit';
 import { injectGlobal } from 'styled-components';
 
@@ -23,6 +24,9 @@ class Template extends React.Component {
     const { location, children } = this.props
     return (
       <div>
+        <Helmet>
+          <link rel="shortcut icon" href="/favicon.png" />
+        </Helmet>
         <Typekit kitId="dxl2kun" />
         {children()}
 

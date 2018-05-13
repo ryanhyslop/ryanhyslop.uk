@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Container } from '../container/container';
+import github from './github.svg';
 import picture from './picture.jpeg';
 import twitter from './twitter.svg';
 
@@ -31,6 +32,14 @@ const FooterTwitter = styled.a`
   padding-left: 1.5em;
 `
 
+const FooterGithub = styled.a`
+  font-size: 16px;
+  color: #fff;
+  background: url(${github}) no-repeat left center;
+  padding-left: 1.25em;
+  margin-left: 1rem;
+`
+
 const FooterSignature = styled.p`
   color: #fff;
   margin: 0 0 0.5em 0;
@@ -55,6 +64,9 @@ export default props => (
       <FooterTwitter href="http://www.twitter.com/ryanhyslop">
         @ryanhyslop
       </FooterTwitter>
+      <FooterGithub href="http://github.com/ryanhyslop">
+        ryanhyslop
+      </FooterGithub>
     </Container>
   </Footer>
 )
