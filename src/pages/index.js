@@ -1,10 +1,11 @@
-import React from 'react'
-import Link from 'gatsby-link'
-import get from 'lodash/get'
-import Helmet from 'react-helmet'
+import get from 'lodash/get';
+import React from 'react';
+import Helmet from 'react-helmet';
 
-import Bio from '../components/Bio'
-import { rhythm } from '../utils/typography'
+import { Article } from '../components/article/article';
+import { Container } from '../components/container/container';
+import { Header } from '../components/header/header';
+import { SectionTitle } from '../components/section-title/section-title';
 
 class BlogIndex extends React.Component {
   render() {
@@ -13,26 +14,25 @@ class BlogIndex extends React.Component {
 
     return (
       <div>
-        <Helmet title={siteTitle} />
-        <Bio />
-        {posts.map(({ node }) => {
-          const title = get(node, 'frontmatter.title') || node.fields.slug
-          return (
-            <div key={node.fields.slug}>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-              <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-            </div>
-          )
-        })}
+        <Header />
+        <Container type="narrow">
+          <Helmet title={siteTitle} />
+          <SectionTitle>
+            <span>Articles</span>
+          </SectionTitle>
+          {posts.map(({ node }) => {
+            const title = get(node, 'frontmatter.title') || node.fields.slug
+            return (
+              <Article
+                key={node.fields.slug}
+                link={node.fields.slug}
+                title={title}
+                date={node.frontmatter.date}
+                content={node.excerpt}
+              />
+            )
+          })}
+        </Container>
       </div>
     )
   }

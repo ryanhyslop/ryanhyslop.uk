@@ -1,10 +1,12 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
-import get from 'lodash/get'
+import Link from 'gatsby-link';
+import get from 'lodash/get';
+import React from 'react';
+import Helmet from 'react-helmet';
 
-import Bio from '../components/Bio'
-import { rhythm, scale } from '../utils/typography'
+import { Article } from '../components/article/article';
+import { Container } from '../components/container/container';
+import { Header } from '../components/header/header';
+import Main from '../components/main/main';
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -14,51 +16,44 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <div>
+        <Header type="small" />
         <Helmet title={`${post.frontmatter.title} | ${siteTitle}`} />
-        <h1>{post.frontmatter.title}</h1>
-        <p
-          style={{
-            ...scale(-1 / 5),
-            display: 'block',
-            marginBottom: rhythm(1),
-            marginTop: rhythm(-1),
-          }}
-        >
-          {post.frontmatter.date}
-        </p>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
-        <Bio />
+        <Container type="narrow">
+          <Main>
+            <Article
+              title={post.frontmatter.title}
+              date={post.frontmatter.date}
+              content={post.html}
+              type="single"
+            />
 
-        <ul
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            listStyle: 'none',
-            padding: 0,
-          }}
-        >
-          {previous && (
-            <li>
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            </li>
-          )}
+            <ul
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+                listStyle: 'none',
+                padding: 0,
+              }}
+            >
+              {previous && (
+                <li>
+                  <Link to={previous.fields.slug} rel="prev">
+                    ← {previous.frontmatter.title}
+                  </Link>
+                </li>
+              )}
 
-          {next && (
-            <li>
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            </li>
-          )}
-        </ul>
+              {next && (
+                <li>
+                  <Link to={next.fields.slug} rel="next">
+                    {next.frontmatter.title} →
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </Main>
+        </Container>
       </div>
     )
   }
